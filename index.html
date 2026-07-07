@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palaniyokesh | Portfolio</title>
+    <!-- Meta tags for SEO -->
+    <meta name="description"
+        content="Portfolio of Palaniyokesh - Full Stack Developer, UI/UX & Graphic Designer, and Automation Test Engineer. Discover futuristic, premium web solutions, designs, and automated testing frameworks.">
+    <meta name="keywords"
+        content="Palaniyokesh, Portfolio, Full Stack Developer, UI/UX Designer, Graphic Designer, Automation Test Engineer, Selenium, Python, Flask">
+    <meta name="author" content="Palaniyokesh">
+
+    <!-- Open Graph tags for Social Sharing -->
+    <meta property="og:title" content="Palaniyokesh | Premium Portfolio">
+    <meta property="og:description"
+        content="Explore the portfolio of Palaniyokesh - building scalable web applications, beautiful user experiences, and robust automation testing frameworks.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/profile.png">
+
+    <!-- Google Fonts: Outfit (Clean UI) & Orbitron (Futuristic Display) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Outfit:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Premium Preloader -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">Palani<span>yokesh</span></div>
+            <div class="loader-bar-bg">
+                <div class="loader-bar"></div>
+            </div>
+            <div class="loader-text">Initializing Systems... <span class="loader-percent">0%</span></div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor Glow -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Background Gradient Blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- Header / Sticky Navigation -->
+    <header id="header">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                P<span>alaniyokesh</span>
+            </a>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content" data-aos="fade-right">
+                    <span class="hero-sub">Welcome to my portfolio</span>
+                    <h1 class="hero-title">
+                        Hello !<br>I'm <span class="accent-text">Palaniyokesh</span>
+                    </h1>
+                    <div class="typing-container">
+                        <span class="typing-prefix">I am a </span>
+                        <span id="typing-text"></span>
+                    </div>
+                    <p class="hero-description">
+                        Passionate about building scalable web applications, creating beautiful user experiences,
+                        automating software testing with Selenium & Python, and designing professional digital products.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary ripple">
+                            <span>Explore Projects</span>
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </a>
+                        <a href="assets/resume.pdf" download="Palaniyokesh_Resume.pdf" class="btn btn-secondary">
+                            <span>Download Resume</span>
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-visual" data-aos="fade-left">
+                    <div class="profile-wrapper" id="parallax-profile">
+                        <!-- Background blurred glow circle -->
+                        <div class="profile-glow-circle"></div>
+
+                        <!-- Rotating dashed border -->
+                        <div class="profile-border-rotating"></div>
+
+                        <!-- Floating gradient ring -->
+                        <div class="profile-ring-gradient"></div>
+
+                        <!-- Main circular profile picture -->
+                        <div class="profile-img-container">
+                            <img src="assets/profile.jpeg" alt="Palaniyokesh" class="profile-img">
+                        </div>
+
+                        <!-- Floating futuristic shapes / labels -->
+                        <div class="floating-shape shape-1" data-depth="0.15">
+                            <i class="fa-brands fa-python"></i>
+                        </div>
+                        <div class="floating-shape shape-2" data-depth="-0.2">
+                            <i class="fa-brands fa-git-alt"></i>
+                        </div>
+                        <div class="floating-shape shape-3" data-depth="0.25">
+                            <i class="fa-solid fa-flask"></i>
+                        </div>
+                        <div class="floating-shape shape-4" data-depth="-0.1">
+                            <i class="fa-solid fa-cube"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mouse scroll indicator -->
+            <div class="scroll-indicator">
+                <a href="#about" aria-label="Scroll to About Section">
+                    <div class="mouse">
+                        <div class="wheel"></div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Tech Skills Section -->
+        <section id="skills" class="skills-section">
+            <div class="container">
+                <h3 class="skills-title">Technologies in My Arsenal</h3>
+                <!-- Infinite horizontal scrolling skills row -->
+                <div class="skills-marquee-container">
+                    <div class="skills-marquee-track">
+                        <!-- Group 1 -->
+                        <div class="skill-item" data-tooltip="HTML5">
+                            <i class="fa-brands fa-html5 skill-icon" style="color: #E34F26;"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="CSS3">
+                            <i class="fa-brands fa-css3-alt skill-icon" style="color: #1572B6;"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="JavaScript">
+                            <i class="fa-brands fa-square-js skill-icon" style="color: #F7DF1E;"></i>
+                            <span>JavaScript</span>
+                        </div>
+
+                        <div class="skill-item" data-tooltip="Python">
+                            <i class="fa-brands fa-python skill-icon" style="color: #3776AB;"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Flask">
+                            <i class="fa-solid fa-pepper-hot skill-icon" style="color: #00E5FF;"></i>
+                            <span>Flask</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="MySQL">
+                            <i class="fa-solid fa-database skill-icon" style="color: #00758F;"></i>
+                            <span>MySQL</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="MongoDB">
+                            <i class="fa-solid fa-leaf skill-icon" style="color: #47A248;"></i>
+                            <span>MongoDB</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Git">
+                            <i class="fa-brands fa-git-alt skill-icon" style="color: #F05032;"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="GitHub">
+                            <i class="fa-brands fa-github skill-icon" style="color: #FFFFFF;"></i>
+                            <span>GitHub</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Figma">
+                            <i class="fa-brands fa-figma skill-icon" style="color: #F24E1E;"></i>
+                            <span>Figma</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Adobe Photoshop">
+                            <i class="fa-solid fa-image skill-icon" style="color: #31A8FF;"></i>
+                            <span>Photoshop</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Adobe Illustrator">
+                            <i class="fa-solid fa-palette skill-icon" style="color: #FF9A00;"></i>
+                            <span>Illustrator</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Adobe XD">
+                            <i class="fa-solid fa-bezier-curve skill-icon" style="color: #FF61F6;"></i>
+                            <span>Adobe XD</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Selenium">
+                            <i class="fa-solid fa-vial-circle-check skill-icon" style="color: #43B02A;"></i>
+                            <span>Selenium</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="PyTest">
+                            <i class="fa-solid fa-vial-virus skill-icon" style="color: #019A8F;"></i>
+                            <span>PyTest</span>
+                        </div>
+
+                        <!-- Duplicate Group 1 for seamless scrolling -->
+                        <div class="skill-item" data-tooltip="HTML5">
+                            <i class="fa-brands fa-html5 skill-icon" style="color: #E34F26;"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="CSS3">
+                            <i class="fa-brands fa-css3-alt skill-icon" style="color: #1572B6;"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="JavaScript">
+                            <i class="fa-brands fa-square-js skill-icon" style="color: #F7DF1E;"></i>
+                            <span>JavaScript</span>
+                        </div>
+
+                        <div class="skill-item" data-tooltip="Python">
+                            <i class="fa-brands fa-python skill-icon" style="color: #3776AB;"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Flask">
+                            <i class="fa-solid fa-pepper-hot skill-icon" style="color: #00E5FF;"></i>
+                            <span>Flask</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="MySQL">
+                            <i class="fa-solid fa-database skill-icon" style="color: #00758F;"></i>
+                            <span>MySQL</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="MongoDB">
+                            <i class="fa-solid fa-leaf skill-icon" style="color: #47A248;"></i>
+                            <span>MongoDB</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Git">
+                            <i class="fa-brands fa-git-alt skill-icon" style="color: #F05032;"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="GitHub">
+                            <i class="fa-brands fa-github skill-icon" style="color: #FFFFFF;"></i>
+                            <span>GitHub</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Figma">
+                            <i class="fa-brands fa-figma skill-icon" style="color: #F24E1E;"></i>
+                            <span>Figma</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Adobe Photoshop">
+                            <i class="fa-solid fa-image skill-icon" style="color: #31A8FF;"></i>
+                            <span>Photoshop</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Adobe Illustrator">
+                            <i class="fa-solid fa-palette skill-icon" style="color: #FF9A00;"></i>
+                            <span>Illustrator</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Adobe XD">
+                            <i class="fa-solid fa-bezier-curve skill-icon" style="color: #FF61F6;"></i>
+                            <span>Adobe XD</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="Selenium">
+                            <i class="fa-solid fa-vial-circle-check skill-icon" style="color: #43B02A;"></i>
+                            <span>Selenium</span>
+                        </div>
+                        <div class="skill-item" data-tooltip="PyTest">
+                            <i class="fa-solid fa-vial-virus skill-icon" style="color: #019A8F;"></i>
+                            <span>PyTest</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container grid-2">
+                <!-- Left: Card grid of areas -->
+                <div class="about-cards-wrapper" data-aos="fade-right">
+                    <div class="about-card glow-orange">
+                        <div class="card-icon-wrapper">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <h4> Website Development</h4>
+                        <p>High performance full-stack architectures</p>
+                    </div>
+                    <div class="about-card glow-cyan">
+                        <div class="card-icon-wrapper">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h4> UI/UX Design</h4>
+                        <p>Engaging digital layout prototyping</p>
+                    </div>
+                    <div class="about-card glow-cyan">
+                        <div class="card-icon-wrapper">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <h4> Graphic Design</h4>
+                        <p>Bespoke creative identities & posters</p>
+                    </div>
+                    <div class="about-card glow-orange">
+                        <div class="card-icon-wrapper">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <h4> Automation Testing</h4>
+                        <p>Reliable script testing suites in Python</p>
+                    </div>
+                </div>
+
+                <!-- Right: Text & Stats -->
+                <div class="about-info" data-aos="fade-left">
+                    <div class="section-tag">Biography</div>
+                    <h2 class="section-title">About Me</h2>
+                    <p class="about-paragraph">
+                        I am a Computer Science and Engineering student passionate about Full Stack Development, UI/UX
+                        Design, Graphic Design, and Automation Testing. I enjoy creating visually appealing websites,
+                        designing intuitive interfaces, and developing automation frameworks using Selenium and Python.
+                    </p>
+
+                    <!-- Stats count-up container -->
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-number-wrapper">
+                                <span class="stat-number" data-target="3">0</span><span class="stat-suffix">+</span>
+                            </div>
+                            <span class="stat-label">Projects Completed</span>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number-wrapper">
+                                <span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span>
+                            </div>
+                            <span class="stat-label">Technologies</span>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number-wrapper">
+                                <span class="stat-number-text">Every</span>
+                            </div>
+                            <span class="stat-label">Learning Day</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services-section">
+            <div class="container">
+                <div class="center-title" data-aos="fade-up">
+                    <div class="section-tag">Solutions</div>
+                    <h2 class="section-title">Professional Services</h2>
+                    <p class="section-subtitle">Crafting robust codebases and beautiful aesthetics tailored to high
+                        standards.</p>
+                </div>
+
+                <div class="services-grid grid-4" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Service 1 -->
+                    <div class="service-card tilt" data-glow-color="orange">
+                        <div class="service-glow-effect"></div>
+                        <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+                        <h3>Full Stack Development</h3>
+                        <ul class="service-features">
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Modern responsive websites</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> REST APIs</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Database Integration</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Authentication</li>
+                        </ul>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="service-card tilt" data-glow-color="cyan">
+                        <div class="service-glow-effect"></div>
+                        <div class="service-icon"><i class="fa-solid fa-crop-simple"></i></div>
+                        <h3>UI/UX Design</h3>
+                        <ul class="service-features">
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Wireframes</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Responsive layouts</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Prototypes</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Figma & Adobe XD</li>
+                        </ul>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="service-card tilt" data-glow-color="orange">
+                        <div class="service-glow-effect"></div>
+                        <div class="service-icon"><i class="fa-solid fa-compass-drafting"></i></div>
+                        <h3>Graphic Design</h3>
+                        <ul class="service-features">
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Social Media Posters</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Brand Identity</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Logo Design</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Adobe Photoshop & Illustrator</li>
+                        </ul>
+                    </div>
+                    <!-- Service 4 -->
+                    <div class="service-card tilt" data-glow-color="cyan">
+                        <div class="service-glow-effect"></div>
+                        <div class="service-icon"><i class="fa-solid fa-robot"></i></div>
+                        <h3>Automation Testing</h3>
+                        <ul class="service-features">
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Selenium</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Python & PyTest</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Page Object Model (POM)</li>
+                            <li><i class="fa-solid fa-circle-chevron-right"></i> Framework Development</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <div class="center-title" data-aos="fade-up">
+                    <div class="section-tag">Portfolio</div>
+                    <h2 class="section-title">Selected Projects</h2>
+                </div>
+
+                <!-- Category Filtering Tabs -->
+                <div class="filter-tabs" data-aos="fade-up" data-aos-delay="100">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="development">Development</button>
+                    <button class="filter-btn" data-filter="automation">Automation</button>
+                    <button class="filter-btn" data-filter="ui-ux">UI/UX</button>
+                    <button class="filter-btn" data-filter="graphics">Graphics</button>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="projects-grid" data-aos="fade-up" data-aos-delay="200">
+
+                    <!-- Project 1: Food Ordering Website -->
+                    <div class="project-card tilt" data-category="development" data-glow-color="orange">
+                        <div class="project-img-wrapper">
+                            <img src="assets/project-1.png" alt="Food Ordering Website" class="project-img">
+                            <div class="project-overlay">
+                                <a href="https://github.com/palaniyokesh/Campusbites.git" target="_blank"
+                                    class="project-overlay-link" aria-label="GitHub Repository"><i
+                                        class="fa-brands fa-github"></i></a>
+                                <a href="https://google.com" target="_blank" class="project-overlay-link"
+                                    aria-label="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Food Ordering Website</h3>
+                            <p>A full-featured responsive online ordering food hub with dynamic cart functionalities.
+                            </p>
+                            <div class="project-tags">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                                <span>Python</span>
+                                <span>Flask</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com" target="_blank" class="project-link github-btn"><i
+                                        class="fa-brands fa-github"></i> GitHub</a>
+                                <a href="https://google.com" target="_blank" class="project-link demo-btn"><i
+                                        class="fa-solid fa-earth-americas"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Automation Testing Framework -->
+                    <div class="project-card tilt" data-category="automation" data-glow-color="cyan">
+                        <div class="project-img-wrapper">
+                            <img src="assets/project-2.png" alt="Automation Testing Framework" class="project-img">
+                            <div class="project-overlay">
+                                <a href="https://github.com/palaniyokesh/AutomationTesting.git" target="_blank"
+                                    class="project-overlay-link" aria-label="GitHub Repository"><i
+                                        class="fa-brands fa-github"></i></a>
+                                <a href="https://google.com" target="_blank" class="project-overlay-link"
+                                    aria-label="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Automation Testing Framework</h3>
+                            <p>Scalable POM automation testing workspace with custom HTML assertions reports.</p>
+                            <div class="project-tags">
+                                <span>Python</span>
+                                <span>Selenium</span>
+                                <span>PyTest</span>
+                                <span>POM</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com" target="_blank" class="project-link github-btn"><i
+                                        class="fa-brands fa-github"></i> GitHub</a>
+                                <a href="https://google.com" target="_blank" class="project-link demo-btn"><i
+                                        class="fa-solid fa-earth-americas"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Portfolio Website -->
+                    <div class="project-card tilt" data-category="development" data-glow-color="orange">
+                        <div class="project-img-wrapper">
+                            <!-- Let's reuse project-1 for development portfolio visual -->
+                            <img src="assets/project-1.png" alt="Portfolio Website" class="project-img"
+                                style="filter: hue-rotate(90deg);">
+                            <div class="project-overlay">
+                                <a href="https://github.com" target="_blank" class="project-overlay-link"
+                                    aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
+                                <a href="https://google.com" target="_blank" class="project-overlay-link"
+                                    aria-label="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Portfolio Website</h3>
+                            <p>Stunning responsive personal web space showcasing creative animations and modern
+                                aesthetics.</p>
+                            <div class="project-tags">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                                <span>Animations</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com" target="_blank" class="project-link github-btn"><i
+                                        class="fa-brands fa-github"></i> GitHub</a>
+                                <a href="https://google.com" target="_blank" class="project-link demo-btn"><i
+                                        class="fa-solid fa-earth-americas"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: UI/UX Case Study -->
+                    <div class="project-card tilt" data-category="ui-ux" data-glow-color="cyan">
+                        <div class="project-img-wrapper">
+                            <img src="assets/project-1.png" alt="UI/UX Case Study" class="project-img"
+                                style="filter: hue-rotate(180deg);">
+                            <div class="project-overlay">
+                                <a href="https://www.figma.com/proto/6x5wUu9jgUuv1eqZ9FxzmH/Untitled?node-id=65-142&p=f&t=aQ2tjpHgnY82RSMf-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=23%3A3" target="_blank" class="project-overlay-link"
+                                    aria-label="Behance Project"><i class="fa-brands fa-behance"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3>UI/UX web design</h3>
+                            <p>End-to-end design research, interface wireframing, and interactive digital product
+                                prototype.</p>
+                            <div class="project-tags">
+                                <span>Figma</span>
+                                <span>Adobe XD</span>
+                                <span>Prototype</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/proto/6x5wUu9jgUuv1eqZ9FxzmH/Untitled?node-id=65-142&p=f&t=aQ2tjpHgnY82RSMf-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=23%3A3" target="_blank" class="project-link demo-btn"
+                                    style="grid-column: span 2;"><i class="fa-brands fa-behance"></i> Behance
+                                    Portfolio</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: Graphic Design Collection -->
+                    <div class="project-card tilt" data-category="graphics" data-glow-color="orange">
+                        <div class="project-img-wrapper project-gallery">
+                            <img src="assets/project-5.png" alt="Alpha Industries Logo Design"
+                                class="project-img gallery-img active">
+                            <img src="assets/graphic-2.png" alt="Nike Poster Design" class="project-img gallery-img">
+                            <img src="assets/graphic-3.png" alt="Orient Electric Ad" class="project-img gallery-img">
+                            <img src="assets/graphic-4.png" alt="BMW Motorsport Poster" class="project-img gallery-img">
+                            <img src="assets/graphic-5.png" alt="Boult Mustang Series" class="project-img gallery-img">
+                            <div class="gallery-dots">
+                                <span class="gallery-dot active"></span>
+                                <span class="gallery-dot"></span>
+                                <span class="gallery-dot"></span>
+                                <span class="gallery-dot"></span>
+                                <span class="gallery-dot"></span>
+                            </div>
+                            <div class="project-overlay">
+                                <a href="https://behance.net" target="_blank" class="project-overlay-link"
+                                    aria-label="Behance Collection"><i class="fa-brands fa-behance"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Graphic Design Collection</h3>
+                            <p>Brand identity designs, product advertisements, and social media poster compositions for
+                                global brands.</p>
+                            <div class="project-tags">
+                                <span>Photoshop</span>
+                                <span>Illustrator</span>
+                                <span>Brand Identity</span>
+                                <span>Posters</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://behance.net" target="_blank" class="project-link demo-btn"
+                                    style="grid-column: span 2;"><i class="fa-brands fa-behance"></i> Behance
+                                    Portfolio</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="center-title" data-aos="fade-up">
+                    <div class="section-tag">Let's Connect</div>
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p class="section-subtitle">Have a project or opportunity? Send a message and let's construct it
+                        together.</p>
+                </div>
+
+                <div class="contact-grid grid-2" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Left: Info Cards -->
+                    <div class="contact-info-panel">
+                        <div class="contact-card glow-orange">
+                            <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div>
+                                <h4>Email</h4>
+                                <a href="mailto:palaniyokesh8@gmail.com">palaniyokesh@example.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-card glow-cyan">
+                            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <h4>Phone</h4>
+                                <a href="tel:+916369653859">+91-6369653859</a>
+                            </div>
+                        </div>
+                        <div class="contact-card glow-orange">
+                            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Tamil Nadu, India</p>
+                            </div>
+                        </div>
+
+                        <!-- Social links -->
+                        <div class="social-panel">
+                            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i
+                                    class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://github.com" target="_blank" aria-label="GitHub"><i
+                                    class="fa-brands fa-github"></i></a>
+                            <a href="https://behance.net" target="_blank" aria-label="Behance"><i
+                                    class="fa-brands fa-behance"></i></a>
+                            <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i
+                                    class="fa-brands fa-instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Form -->
+                    <div class="contact-form-panel">
+                        <form id="contact-form" class="contact-form" novalidate>
+                            <!-- Web3Forms Access Key - Replace with your key from https://web3forms.com -->
+                            <input type="hidden" name="access_key" value="7b76086c-b590-4819-8551-473394ca3639">
+                            <input type="hidden" name="subject" value="New Portfolio Contact from Website">
+                            <input type="hidden" name="from_name" value="Portfolio Website">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="name" name="name" placeholder="enter name" required>
+                                    <i class="fa-regular fa-user input-icon"></i>
+                                </div>
+                                <span class="error-msg" id="name-error">Please fill in your name</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <div class="input-wrapper">
+                                    <input type="email" id="email" name="email" placeholder="enter email" required>
+                                    <i class="fa-regular fa-envelope input-icon"></i>
+                                </div>
+                                <span class="error-msg" id="email-error">Please enter a valid email address</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="subject" name="subject" placeholder="Project Collaboration"
+                                        required>
+                                    <i class="fa-regular fa-bookmark input-icon"></i>
+                                </div>
+                                <span class="error-msg" id="subject-error">Please fill in the subject</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <div class="input-wrapper">
+                                    <textarea id="message" name="message" rows="5"
+                                        placeholder="Let's build something epic..." required></textarea>
+                                    <i class="fa-regular fa-message input-icon"></i>
+                                </div>
+                                <span class="error-msg" id="message-error">Please type your message</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary form-btn ripple">
+                                <span>Send Message</span>
+                                <i class="fa-regular fa-paper-plane"></i>
+                            </button>
+                        </form>
+
+                        <!-- Success Modal -->
+                        <div class="form-success-alert" id="form-success">
+                            <div class="success-icon"><i class="fa-regular fa-circle-check"></i></div>
+                            <h3>Transmission Sent!</h3>
+                            <p>Thank you for reaching out. I'll get back to you shortly.</p>
+                            <button class="btn btn-secondary success-close-btn" id="success-close">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-line"></div>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#home" class="logo">
+                    P<span>alaniyokesh</span>
+                </a>
+                <p>Developing scalable systems and creative solutions with continuous innovation.</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <div class="footer-socials">
+                <a href="www.linkedin.com/in/palaniyokesh" target="_blank" aria-label="LinkedIn"><i
+                        class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com/palaniyokesh" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://behance.net" target="_blank" aria-label="Behance"><i
+                        class="fa-brands fa-behance"></i></a>
+                <a href="https://www.instagram.com/crazzyfooter?igsh=amlvNzZ1dzdnOTNp" target="_blank" aria-label="Instagram"><i
+                        class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-copy">
+            <p>&copy; 2026 Palaniyokesh. All Rights Reserved. Crafted with passion & futuristic details.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- External CDN Scripts -->
+    <!-- particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Typed.js -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <!-- GSAP Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- GSAP ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
