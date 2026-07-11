@@ -209,9 +209,9 @@ button, input, textarea {
    ========================================================================== */
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 25px;
+    padding: 0 30px;
 }
 
 .grid-2 {
@@ -379,9 +379,9 @@ section {
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 25px;
+    padding: 0 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1930,5 +1930,530 @@ footer {
     
     .stats-container {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   Gallery Lightbox Modal Styles
+   ========================================================================== */
+.lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 13, 18, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 99999;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
+}
+
+.lightbox-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    z-index: 2010;
+}
+
+.lightbox-close:hover {
+    background: var(--accent);
+    color: var(--text);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(255, 107, 74, 0.5);
+    transform: rotate(90deg);
+}
+
+.lightbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1440px;
+    height: 70%;
+    margin: auto;
+    position: relative;
+}
+
+.lightbox-nav {
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    z-index: 2005;
+}
+
+.lightbox-nav:hover {
+    background: var(--accent);
+    color: var(--text);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(255, 107, 74, 0.4);
+}
+
+.lightbox-nav:active {
+    transform: scale(0.95);
+}
+
+.lightbox-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    max-width: 80%;
+    position: relative;
+}
+
+.lightbox-img-wrapper {
+    position: relative;
+    max-height: 75vh;
+    max-width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#lightbox-img {
+    max-height: 75vh;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+    transition: opacity var(--transition-fast);
+    opacity: 1;
+    cursor: zoom-in;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Floating Zoom Controls */
+.lightbox-zoom-controls {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(10, 13, 18, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    padding: 5px 12px;
+    gap: 6px;
+    z-index: 2015;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0.85;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.lightbox-zoom-controls:hover {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+.zoom-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: var(--transition-fast);
+    background: transparent;
+}
+
+.zoom-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--glow);
+}
+
+.zoom-btn:active {
+    transform: scale(0.9);
+}
+
+.zoom-value {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    min-width: 45px;
+    text-align: center;
+    user-select: none;
+}
+
+.lightbox-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    color: var(--accent);
+    display: none;
+}
+
+.lightbox-info {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#lightbox-counter {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    font-weight: 800;
+}
+
+#lightbox-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+#lightbox-category {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.lightbox-thumbnails-wrapper {
+    width: 100%;
+    max-width: 900px;
+    padding: 10px 0;
+    overflow-x: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.lightbox-thumbnails::-webkit-scrollbar {
+    height: 4px;
+}
+
+.lightbox-thumbnails::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.lightbox-thumbnails::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.lightbox-thumbnails {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    width: max-content;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.lightbox-thumb {
+    width: 60px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0.4;
+    border: 2px solid transparent;
+    transition: var(--transition-fast);
+}
+
+.lightbox-thumb:hover {
+    opacity: 0.8;
+}
+
+.lightbox-thumb.active {
+    opacity: 1;
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(255, 107, 74, 0.4);
+}
+
+/* ==========================================================================
+   UI/UX Modal Styles
+   ========================================================================== */
+.uiux-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 13, 18, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
+}
+
+.uiux-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.uiux-modal-card {
+    width: 100%;
+    max-width: 580px;
+    padding: 40px;
+    position: relative;
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.05);
+    transform: scale(0.9);
+    transition: transform var(--transition-smooth);
+}
+
+.uiux-modal-overlay.active .uiux-modal-card {
+    transform: scale(1);
+}
+
+.uiux-modal-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.uiux-modal-close:hover {
+    background: rgba(255, 74, 74, 0.1);
+    color: #FF4A4A;
+    border-color: #FF4A4A;
+    transform: rotate(90deg);
+}
+
+.uiux-modal-header {
+    text-align: center;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.uiux-modal-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 229, 255, 0.1);
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    border-radius: 16px;
+    color: var(--glow);
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+}
+
+.uiux-modal-header h3 {
+    font-family: var(--font-primary);
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.uiux-modal-header p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    max-width: 420px;
+}
+
+.uiux-links-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.uiux-link-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 16px 20px;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.uiux-link-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: transparent;
+    transition: var(--transition-fast);
+}
+
+.uiux-link-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateX(5px);
+}
+
+.uiux-link-card:hover::before {
+    background: var(--glow);
+}
+
+.uiux-link-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.figma-icon {
+    color: #F24E1E;
+    background: rgba(242, 78, 30, 0.08);
+    border: 1px solid rgba(242, 78, 30, 0.15);
+}
+
+.xd-icon {
+    color: #FF61F6;
+    background: rgba(255, 97, 246, 0.08);
+    border: 1px solid rgba(255, 97, 246, 0.15);
+}
+
+.uiux-link-card:hover .figma-icon {
+    box-shadow: 0 0 10px rgba(242, 78, 30, 0.3);
+}
+
+.uiux-link-card:hover .xd-icon {
+    box-shadow: 0 0 10px rgba(255, 97, 246, 0.3);
+}
+
+.uiux-link-text {
+    flex-grow: 1;
+}
+
+.uiux-link-text h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 3px;
+    color: var(--text);
+    transition: var(--transition-fast);
+}
+
+.uiux-link-card:hover .uiux-link-text h4 {
+    color: var(--glow);
+}
+
+.uiux-link-text p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.uiux-link-arrow {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+}
+
+.uiux-link-card:hover .uiux-link-arrow {
+    color: var(--glow);
+    transform: translate(2px, -2px);
+}
+
+/* Responsive fixes for Lightbox & Modal */
+@media (max-width: 768px) {
+    .lightbox-container {
+        height: 60%;
+    }
+    .lightbox-nav {
+        width: 45px;
+        height: 45px;
+    }
+    #lightbox-img {
+        max-height: 55vh;
+    }
+    .uiux-modal-card {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lightbox-nav {
+        position: absolute;
+        bottom: -70px;
+    }
+    .lightbox-prev {
+        left: 20%;
+    }
+    .lightbox-next {
+        right: 20%;
+    }
+    .lightbox-content {
+        max-width: 100%;
+    }
+    #lightbox-img {
+        max-height: 50vh;
+    }
+    .lightbox-close {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    .uiux-modal-card {
+        padding: 25px 15px;
     }
 }

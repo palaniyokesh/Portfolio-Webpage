@@ -597,24 +597,391 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       Graphic Design Gallery Auto-Slide
+       Graphic Design Gallery Lightbox & UI/UX Modal Handlers
        ========================================================================== */
-    const galleries = document.querySelectorAll('.project-gallery');
-    
-    galleries.forEach(gallery => {
-        const imgs = gallery.querySelectorAll('.gallery-img');
-        const dots = gallery.querySelectorAll('.gallery-dot');
-        let currentSlide = 0;
+
+    // Images for Graphic Design Collection
+    const graphicDesignImages = [
+        { src: 'assets/Untitled-1.png', fallback: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=1000&auto=format&fit=crop', title: 'RZ Designs Logo', category: 'Logo Design' },
+        { src: 'assets/Untitled-2.jpg', fallback: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop', title: 'Personal Brand Banner Design', category: 'Brand Identity' },
+        { src: 'assets/SIG Ps.jpg', fallback: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop', title: 'Signature Perfume Advertisement', category: 'Advertising' },
+        { src: 'assets/SPRITE Ps.jpg', fallback: 'https://images.unsplash.com/photo-1561070791-26c113006238?q=80&w=1000&auto=format&fit=crop', title: 'Sprite Product Poster', category: 'Poster Design' },
+        { src: 'assets/ALPHA Ps.jpg', fallback: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop', title: 'Alpha Industries Logo Design', category: 'Brand Identity' },
+        { src: 'assets/BOULT Ps.jpg', fallback: 'https://images.unsplash.com/photo-1626785774625-ddc7c8241314?q=80&w=1000&auto=format&fit=crop', title: 'Boult Mustang Series', category: 'Product Design' },
+        { src: 'assets/NIKE Ps.jpg', fallback: 'https://images.unsplash.com/photo-1561070791-26c113006238?q=80&w=1000&auto=format&fit=crop', title: 'Nike Poster Design', category: 'Poster Design' },
+        { src: 'assets/ORIENT Ps.jpg', fallback: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=1000&auto=format&fit=crop', title: 'Orient Electric Ad', category: 'Advertising' },
+        { src: 'assets/BMW Ps.jpg', fallback: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop', title: 'BMW Motorsport Poster', category: 'Poster Design' }
+    ];
+
+    let currentImageIndex = 0;
+    let thumbnailsGenerated = false;
+
+    // Zoom & Pan State Variables
+    let zoomScale = 1;
+    let isDragging = false;
+    let startX = 0, startY = 0;
+    let translateX = 0, translateY = 0;
+
+    // Cache elements
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxCategory = document.getElementById('lightbox-category');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const lightboxLoader = document.getElementById('lightbox-loader');
+    const thumbnailsContainer = document.getElementById('lightbox-thumbnails-container');
+    const prevBtn = document.getElementById('lightbox-prev-btn');
+    const nextBtn = document.getElementById('lightbox-next-btn');
+    const closeBtn = document.getElementById('lightbox-close-btn');
+
+    // Zoom Buttons and Percentage Display
+    const zoomInBtn = document.getElementById('zoom-in-btn');
+    const zoomOutBtn = document.getElementById('zoom-out-btn');
+    const zoomResetBtn = document.getElementById('zoom-reset-btn');
+    const zoomPercentEl = document.getElementById('zoom-percentage');
+
+    // UI/UX Modal Elements
+    const uiuxModal = document.getElementById('uiux-links-modal');
+    const uiuxCloseBtn = document.querySelector('.uiux-modal-overlay #uiux-close-btn');
+
+    // 1. Gallery Lightbox Logic
+    function initGalleryThumbnails() {
+        if (thumbnailsGenerated || !thumbnailsContainer) return;
         
-        if (imgs.length <= 1) return;
+        thumbnailsContainer.innerHTML = '';
+        graphicDesignImages.forEach((img, idx) => {
+            const thumb = document.createElement('img');
+            thumb.className = 'lightbox-thumb';
+            thumb.src = img.src;
+            thumb.alt = img.title;
+            thumb.dataset.index = idx;
+
+            // Robust thumbnail error fallback
+            thumb.onerror = () => {
+                thumb.onerror = null;
+                thumb.src = img.fallback;
+            };
+
+            thumb.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showImage(idx);
+            });
+            thumbnailsContainer.appendChild(thumb);
+        });
+        thumbnailsGenerated = true;
+    }
+
+    // Zoom and Pan transform helper
+    function updateTransform() {
+        if (!lightboxImg) return;
         
-        setInterval(() => {
-            imgs[currentSlide].classList.remove('active');
-            dots[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % imgs.length;
-            imgs[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
-        }, 3000);
+        if (zoomScale === 1) {
+            translateX = 0;
+            translateY = 0;
+        } else {
+            // Get actual dimensions
+            const imgWidth = lightboxImg.offsetWidth;
+            const imgHeight = lightboxImg.offsetHeight;
+            
+            // Constrain translation limits to keep image within view boundaries
+            const maxTx = Math.max(0, (imgWidth * zoomScale - imgWidth) / 2);
+            const maxTy = Math.max(0, (imgHeight * zoomScale - imgHeight) / 2);
+            
+            translateX = Math.min(Math.max(translateX, -maxTx), maxTx);
+            translateY = Math.min(Math.max(translateY, -maxTy), maxTy);
+        }
+        
+        lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${zoomScale})`;
+        
+        if (zoomPercentEl) {
+            zoomPercentEl.textContent = `${Math.round(zoomScale * 100)}%`;
+        }
+        
+        // Update cursor state
+        if (zoomScale > 1) {
+            lightboxImg.style.cursor = isDragging ? 'grabbing' : 'grab';
+        } else {
+            lightboxImg.style.cursor = 'zoom-in';
+        }
+    }
+
+    function resetZoom() {
+        zoomScale = 1;
+        translateX = 0;
+        translateY = 0;
+        if (lightboxImg) {
+            lightboxImg.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+            updateTransform();
+            setTimeout(() => {
+                if (lightboxImg) lightboxImg.style.transition = '';
+            }, 300);
+        }
+    }
+
+    // Setup zoom control button events
+    if (zoomInBtn) {
+        zoomInBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            zoomScale = Math.min(4, zoomScale + 0.25);
+            if (lightboxImg) lightboxImg.style.transition = 'transform 0.25s cubic-bezier(0.25, 1, 0.5, 1)';
+            updateTransform();
+            setTimeout(() => { if (lightboxImg) lightboxImg.style.transition = ''; }, 250);
+        });
+    }
+
+    if (zoomOutBtn) {
+        zoomOutBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            zoomScale = Math.max(1, zoomScale - 0.25);
+            if (lightboxImg) lightboxImg.style.transition = 'transform 0.25s cubic-bezier(0.25, 1, 0.5, 1)';
+            updateTransform();
+            setTimeout(() => { if (lightboxImg) lightboxImg.style.transition = ''; }, 250);
+        });
+    }
+
+    if (zoomResetBtn) {
+        zoomResetBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            resetZoom();
+        });
+    }
+
+    // Drag / Pan & mouse scroll zoom events
+    if (lightboxImg) {
+        lightboxImg.addEventListener('mousedown', (e) => {
+            if (zoomScale <= 1) return;
+            e.preventDefault();
+            isDragging = true;
+            startX = e.clientX - translateX;
+            startY = e.clientY - translateY;
+            lightboxImg.style.transition = 'none';
+            updateTransform();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            translateX = e.clientX - startX;
+            translateY = e.clientY - startY;
+            updateTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                updateTransform();
+            }
+        });
+
+        // Touch support for mobile devices
+        lightboxImg.addEventListener('touchstart', (e) => {
+            if (zoomScale <= 1 || e.touches.length !== 1) return;
+            isDragging = true;
+            startX = e.touches[0].clientX - translateX;
+            startY = e.touches[0].clientY - translateY;
+            lightboxImg.style.transition = 'none';
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging || e.touches.length !== 1) return;
+            translateX = e.touches[0].clientX - startX;
+            translateY = e.touches[0].clientY - startY;
+            updateTransform();
+        });
+
+        window.addEventListener('touchend', () => {
+            if (isDragging) {
+                isDragging = false;
+                updateTransform();
+            }
+        });
+
+        // Mouse Wheel Zoom
+        lightboxImg.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -0.25 : 0.25;
+            const newScale = Math.min(4, Math.max(1, zoomScale + delta));
+            
+            if (newScale !== zoomScale) {
+                zoomScale = newScale;
+                lightboxImg.style.transition = 'transform 0.1s cubic-bezier(0.25, 1, 0.5, 1)';
+                updateTransform();
+                setTimeout(() => { if (lightboxImg) lightboxImg.style.transition = ''; }, 100);
+            }
+        }, { passive: false });
+
+        // Double Click to toggle zoom
+        lightboxImg.addEventListener('dblclick', (e) => {
+            if (zoomScale > 1) {
+                resetZoom();
+            } else {
+                zoomScale = 2.5;
+                // Focus zoom on the clicked location
+                const rect = lightboxImg.getBoundingClientRect();
+                const clickX = e.clientX - rect.left - (rect.width / 2);
+                const clickY = e.clientY - rect.top - (rect.height / 2);
+                translateX = -clickX * 1.5;
+                translateY = -clickY * 1.5;
+                
+                lightboxImg.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+                updateTransform();
+                setTimeout(() => { if (lightboxImg) lightboxImg.style.transition = ''; }, 300);
+            }
+        });
+    }
+
+    function showImage(index) {
+        if (!lightboxImg) return;
+
+        resetZoom(); // Reset scale & position for the new image
+
+        // Wrap around index
+        if (index < 0) {
+            index = graphicDesignImages.length - 1;
+        } else if (index >= graphicDesignImages.length) {
+            index = 0;
+        }
+
+        currentImageIndex = index;
+        const currentImg = graphicDesignImages[index];
+
+        // Setup loading state
+        lightboxLoader.style.display = 'block';
+        lightboxImg.style.opacity = '0';
+
+        let hasFailedOnce = false;
+
+        lightboxImg.onload = () => {
+            lightboxLoader.style.display = 'none';
+            lightboxImg.style.opacity = '1';
+        };
+
+        lightboxImg.onerror = () => {
+            if (!hasFailedOnce) {
+                hasFailedOnce = true;
+                lightboxImg.src = currentImg.fallback;
+            } else {
+                lightboxImg.onerror = null;
+                lightboxLoader.style.display = 'none';
+                lightboxImg.src = 'assets/ALPHA Ps.jpg'; // Final safety image
+                lightboxImg.style.opacity = '1';
+            }
+        };
+
+        lightboxImg.src = currentImg.src;
+
+        // Set Texts
+        if (lightboxCounter) lightboxCounter.textContent = `${index + 1} / ${graphicDesignImages.length}`;
+        if (lightboxTitle) lightboxTitle.textContent = currentImg.title;
+        if (lightboxCategory) lightboxCategory.textContent = currentImg.category;
+
+        // Update Thumbnails classes
+        const thumbs = document.querySelectorAll('.lightbox-thumb');
+        thumbs.forEach((thumb, idx) => {
+            if (idx === index) {
+                thumb.classList.add('active');
+                thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            } else {
+                thumb.classList.remove('active');
+            }
+        });
+    }
+
+    function openGallery(startIndex) {
+        if (!lightbox) return;
+        initGalleryThumbnails();
+        
+        lightbox.style.display = 'flex';
+        setTimeout(() => {
+            lightbox.classList.add('active');
+        }, 10);
+        
+        document.body.style.overflow = 'hidden';
+        showImage(startIndex);
+    }
+
+    function closeGallery() {
+        if (!lightbox) return;
+        lightbox.classList.remove('active');
+        setTimeout(() => {
+            lightbox.style.display = 'none';
+            resetZoom(); // Reset zoom state when gallery is closed
+        }, 400);
+        document.body.style.overflow = '';
+    }
+
+    // Bind Gallery triggers
+    document.querySelectorAll('.open-graphics-gallery').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openGallery(0);
+        });
     });
+
+    if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showImage(currentImageIndex - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showImage(currentImageIndex + 1); });
+    if (closeBtn) closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeGallery(); });
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-container')) {
+                closeGallery();
+            }
+        });
+    }
+
+    // Keyboard support for Gallery & Modals
+    document.addEventListener('keydown', (e) => {
+        if (lightbox && lightbox.classList.contains('active')) {
+            if (e.key === 'Escape') closeGallery();
+            if (e.key === 'ArrowLeft') showImage(currentImageIndex - 1);
+            if (e.key === 'ArrowRight') showImage(currentImageIndex + 1);
+        }
+        if (uiuxModal && uiuxModal.classList.contains('active')) {
+            if (e.key === 'Escape') closeUIUXModal();
+        }
+    });
+
+    // 2. UI/UX Links Modal Logic
+    function openUIUXModal() {
+        if (!uiuxModal) return;
+        uiuxModal.style.display = 'flex';
+        setTimeout(() => {
+            uiuxModal.classList.add('active');
+        }, 10);
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeUIUXModal() {
+        if (!uiuxModal) return;
+        uiuxModal.classList.remove('active');
+        setTimeout(() => {
+            uiuxModal.style.display = 'none';
+        }, 400);
+        document.body.style.overflow = '';
+    }
+
+    // Bind UI/UX triggers
+    document.querySelectorAll('.open-uiux-modal').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openUIUXModal();
+        });
+    });
+
+    if (uiuxCloseBtn) {
+        uiuxCloseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeUIUXModal();
+        });
+    }
+
+    if (uiuxModal) {
+        uiuxModal.addEventListener('click', (e) => {
+            if (e.target === uiuxModal) {
+                closeUIUXModal();
+            }
+        });
+    }
 
 });
